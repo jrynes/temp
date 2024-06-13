@@ -1,0 +1,1205 @@
+<div id="chatbotContainer">
+    <button id="chatbotToggle" onclick="toggleChatbot()" aria-expanded="false" aria-controls="chatInterface" aria-label="Open chat">+</button>
+    <div id="chatInterface" class="hidden" role="dialog" aria-labelledby="chatHeader">
+        <div id="chatHeader" role="banner">
+            <span>Chatbot</span>
+            <div id="buttonContainer">
+                <!-- Commenting out the restore chat history button for now -->
+                <!-- Don't forget to check toggleChatbot and clearChatHistory JS functions, if re-enabling -->
+                <!-- <button id="restoreChatHistory" class="hidden" onclick="restoreChatHistory()" aria-label="Restore chat history" title="Restore chat history">Restore</button> -->
+                <button id="clearChatHistory" onclick="clearChatHistory()" aria-label="Clear chat history" title="Clear chat history">Clear</button>
+                <button id="minimizeChat" onclick="minimizeChat()" aria-label="Minimize chat" title="Minimize chat">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" y1="20" x2="20" y2="20"></line>
+                      </svg>
+                </button>
+                <button id="maximizeChat" onclick="maximizeChat()" aria-label="Maximize chat" title="Maximize chat">
+                    <svg width="16" height="16" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button id="closeChat" onclick="toggleChatbot()" aria-label="Close chat" title="Close chat">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="3" x2="6" y2="18"></line>
+                        <line x1="6" y1="3" x2="18" y2="18"></line>
+                      </svg>
+                </button>        
+            </div>
+        </div>
+        <div id="disclaimer" role="alert">
+            <svg width="200" height="50" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <style type="text/css">
+                    .st0 { fill: #FFFFFF; }
+                </style>
+                <path class="st0" d="M29.44,301.54c2.14,3.85,5.44,5.2,9.79,5.2c89.25-0.06,178.49-0.06,267.74,0c3.83,0,6.98-0.98,9.33-4.07c0,1.5,0,3,0,4.51c-95.62,0-191.24,0-286.87,0C29.44,305.29,29.44,303.41,29.44,301.54z"/>
+                <path d="M216.05,240.4c5.46-4.81,10.6-9.34,15.82-13.94c0.07,0.1,0.59,0.72,1.05,1.39c8.73,12.78,17.47,25.56,26.15,38.38c1.41,2.09,2.7,4.29,3.73,6.59c1.25,2.79,0.24,4.48-2.89,4.93c-2.5,0.36-5.06,0.51-7.59,0.48c-19.44-0.26-38.87-0.6-58.31-0.86c-2.71-0.04-2.5-1.29-1.48-2.99c5.1-8.49,10.22-16.97,15.43-25.63c-32.21-14.25-65.08-28.79-98.33-43.51c1.47-3.34,2.87-6.53,4.35-9.91c2.15,0.91,4.02,1.71,6.25,2.65c2.07-3.65,4.24-7.23,6.15-10.94c1.73-3.36,4.15-5.22,8.03-5.72c5.94-0.76,11.8-2.14,17.73-3.01c1.67-0.25,3.62-0.03,5.18,0.6c7.98,3.24,15.86,6.74,23.82,10.04c3.06,1.27,4.78,3.4,5.46,6.6c2.27,10.72,4.64,21.41,6.87,32.14c0.46,2.2,1.37,3.49,3.57,4.38C203.62,234.76,210.08,237.76,216.05,240.4z M149.98,192.8c-3.82,0.63-7.05,1.13-10.26,1.74c-0.76,0.15-1.74,0.51-2.11,1.1c-1.61,2.57-3.03,5.27-4.59,8.04c3.39,1.49,6.44,2.84,9.69,4.27C145.14,202.9,147.48,198.03,149.98,192.8z M178.44,223.73c-1.46-6.67-2.79-12.77-4.13-18.88c-0.17,0-0.34-0.01-0.51-0.01c-1.8,4.75-3.6,9.49-5.48,14.43C171.72,220.77,174.82,222.14,178.44,223.73z"/>
+                <path d="M136.1,224.67c4.09,1.81,7.95,3.46,11.73,5.26c0.5,0.24,0.98,1.35,0.86,1.93c-3.07,14.44-6.22,28.87-9.42,43.29c-0.14,0.65-0.93,1.64-1.44,1.66c-4,0.14-8.01,0.08-12.42,0.08C128.97,259.49,132.5,242.23,136.1,224.67z"/>
+                <path d="M162.47,165.39c-0.02-7.78,6.54-14.34,14.34-14.33c7.78,0.01,14.39,6.66,14.3,14.38c-0.09,7.69-6.51,14.11-14.22,14.22C169.17,179.78,162.49,173.17,162.47,165.39z"/>
+                <path d="M175.83,277.15c-4.83,0-9.21,0-13.77,0c0-2.34-0.05-4.55,0.01-6.77c0.17-5.81,0.46-11.62,0.52-17.44c0.01-1.32-0.53-2.74-1.14-3.95c-2.77-5.49-5.65-10.92-8.84-17.02c6.67,2.95,13.05,5.06,18.59,8.51c2.62,1.64,4.98,5.78,5.14,8.9C176.8,258.51,176.09,267.71,175.83,277.15z"/>
+                <path class="st0" d="M149.98,192.8c-2.51,5.23-4.84,10.1-7.26,15.15c-3.25-1.43-6.3-2.78-9.69-4.27c1.56-2.77,2.98-5.47,4.59-8.04c0.37-0.59,1.35-0.96,2.11-1.1C142.93,193.92,146.16,193.43,149.98,192.8z"/>
+                <path class="st0" d="M178.44,223.73c-3.62-1.6-6.72-2.96-10.12-4.46c1.88-4.94,3.68-9.69,5.48-14.43c0.17,0,0.34,0.01,0.51,0.01C175.64,210.96,176.98,217.07,178.44,223.73z"/>
+                <path d="M293.88,308.6c-0.02,0-0.04,0-0.06,0l-238.72-0.35c-9.45-0.01-16.6-3.51-20.13-9.86c-3.53-6.34-2.73-14.26,2.25-22.3L154.95,86c4.84-7.82,11.89-12.31,19.32-12.31c0,0,0,0,0,0c7.43,0,14.47,4.48,19.32,12.3l118.12,190.54c4.98,8.04,5.79,15.95,2.26,22.28C310.44,305.12,303.31,308.6,293.88,308.6z M55.13,296.25l238.72,0.35c0.01,0,0.03,0,0.04,0c4.81,0,8.31-1.32,9.6-3.63c1.29-2.32,0.57-6-1.98-10.11L183.39,92.32c-2.65-4.27-5.89-6.63-9.12-6.63c0,0,0,0,0,0c-3.23,0-6.47,2.35-9.12,6.63L47.44,282.41c-2.55,4.11-3.26,7.81-1.96,10.15S50.29,296.24,55.13,296.25L55.13,296.25z"/>
+            </svg>
+            <span>
+                <strong>Disclaimer: Early Development</strong><br/>
+                Please note: This chatbot is in early development; your understanding and feedback are appreciated as we work to improve it.
+            </span>
+        </div>
+        <div id="conversation" style="flex: 1; overflow-y: scroll;" role="log" aria-live="polite"></div>
+        <div id="errorMessage" class="hidden error-message" role="alert"></div>
+        <div id="chatFooter">
+            <label for="userInput" class="visually-hidden">Type a message</label>
+            <input type="text" id="userInput" placeholder="Type a message" onkeydown="if (event.keyCode === 13) sendMessage();" aria-label="Type a message" />
+            <button id="sendButton" onclick="sendMessage()" aria-label="Send message">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
+                </svg>
+            </button>
+            <div id="loadingSpinner" class="spinner hidden"></div>
+        </div>
+        <div id="resize-top"></div>
+        <div id="resize-right"></div>
+        <div id="resize-bottom"></div>
+        <div id="resize-left"></div>
+        <div id="resize-top-left"></div>
+        <div id="resize-top-right"></div>
+        <div id="resize-bottom-left"></div>
+        <div id="resize-bottom-right"></div>
+    </div>
+</div>
+
+<style>
+:root {
+    --primary-color: #007bff;
+    --primary-color-hover: #0056b3;
+    --user-message-bg-color: #28a745;
+    --bot-message-bg-color: #0a84ff;
+    --option-button-bg-color: #f1f1f1;
+    --option-button-text-color: black;
+    --box-shadow-color: rgba(0, 0, 0, 0.1);
+    --user-message-after-color: #28a745;
+    --bot-message-after-color: #0a84ff;
+    --header-bg-color: #f1f1f1;
+    --header-button-hover-color: #d9534f;
+    --header-button-active-color: #c9302c;
+    --footer-bg-color: #f1f1f1;
+    --footer-input-border-color: #ccc;
+    --footer-input-error-color: red;
+    --footer-button-hover-bg-color: #218838;
+    --footer-button-active-bg-color: #1e7e34;
+    --spinner-border-color: rgba(0, 0, 0, 0.1);
+    --spinner-top-border-color: #28a745;
+    --previous-chat-indicator-bg: #707070;
+    --previous-chat-indicator-text-color: #fff;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+#chatbotContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+#chatbotToggle {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    animation: bounceIn 0.5s;
+}
+
+#chatbotToggle:hover {
+    background-color: var(--primary-color-hover);
+    transform: scale(1.1);
+}
+
+#chatInterface.hidden {
+    display: none;
+}
+
+#chatInterface {
+    border: 1px solid var(--footer-input-border-color);
+    border-radius: 10px;
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    box-shadow: 0 0 10px var(--box-shadow-color);
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    animation: fadeIn 0.5s;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    overflow: hidden;
+    min-width: 300px;
+    min-height: 400px;
+}
+
+#resize-top, #resize-right, #resize-bottom, #resize-left,
+#resize-top-left, #resize-top-right, #resize-bottom-left, #resize-bottom-right {
+    position: absolute;
+    z-index: 1001;
+}
+
+#resize-top, #resize-bottom {
+    height: 5px;
+    left: 0;
+    right: 0;
+    cursor: ns-resize;
+}
+
+#resize-top {
+    top: 0;
+}
+
+#resize-bottom {
+    bottom: 0;
+}
+
+#resize-left, #resize-right {
+    width: 5px;
+    top: 0;
+    bottom: 0;
+    cursor: ew-resize;
+}
+
+#resize-left {
+    left: 0;
+}
+
+#resize-right {
+    right: 0;
+}
+
+#resize-top-left, #resize-top-right, #resize-bottom-left, #resize-bottom-right {
+    width: 10px;
+    height: 10px;
+}
+
+#resize-top-left, #resize-bottom-right {
+    cursor: nwse-resize;
+}
+
+#resize-top-right, #resize-bottom-left {
+    cursor: nesw-resize;
+}
+
+#resize-top-left {
+    top: 0;
+    left: 0;
+}
+
+#resize-top-right {
+    top: 0;
+    right: 0;
+}
+
+#resize-bottom-left {
+    bottom: 0;
+    left: 0;
+}
+
+#resize-bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+#chatHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--header-bg-color);
+    border-bottom: 1px solid var(--footer-input-border-color);
+    border-radius: 10px 10px 0 0;
+    cursor: move;
+}
+
+#chatHeader span {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+#chatHeader button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: black;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+#chatHeader button:hover {
+    color: var(--header-button-hover-color);
+    transform: scale(1.1);
+}
+
+#chatHeader button:active {
+    color: var(--header-button-active-color);
+}
+
+#chatFooter {
+    display: flex;
+    padding: 10px;
+    background-color: var(--footer-bg-color);
+    border-top: 1px solid var(--footer-input-border-color);
+    border-radius: 0 0 10px 10px;
+    position: relative;
+}
+
+#chatFooter input {
+    flex: 1;
+    border: 1px solid var(--footer-input-border-color);
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 5px;
+    font-family: Arial, sans-serif;
+}
+
+#chatFooter input.errorMessage {
+    color: var(--footer-input-error-color);
+}
+
+#chatFooter button {
+    background-color: var(--user-message-bg-color);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#chatFooter button:hover {
+    background-color: var(--footer-button-hover-bg-color);
+    box-shadow: 0 0 10px var(--box-shadow-color);
+    transform: scale(1.05);
+}
+
+#chatFooter button:active {
+    background-color: var(--footer-button-active-bg-color);
+}
+
+#chatFooter button:before {
+    content: "";
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    top: 50%;
+    left: 50%;
+    pointer-events: none;
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    border-radius: 50%;
+}
+
+#chatFooter button:hover:before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 4px solid var(--spinner-border-color);
+    border-top-color: var(--spinner-top-border-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.hidden {
+    display: none;
+}
+
+#buttonContainer {
+    display: flex;
+    position: relative;
+    height: 30px;
+    width: 200px;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#clearChatHistory, #restoreChatHistory {
+    /* position: absolute; */
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    /* margin: 10px; */
+    top: 0;
+    right: 70px;
+    /* width: 20px; */
+}
+
+/* #clearChatHistory {
+    left: 0;
+}
+
+#restoreChatHistory {
+    right: 0;
+} */
+
+#clearChatHistory:hover, #restoreChatHistory:hover {
+    background-color: var(--header-bg-color);
+}
+
+#clearChatHistory:active, #restoreChatHistory:active {
+    background-color: var(--header-bg-color);
+}
+
+#disclaimer {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--header-bg-color);
+    border-bottom: 1px solid var(--footer-input-border-color);
+    font-size: 12px;
+    color: #333;
+}
+
+#disclaimer svg {
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.messageRow {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.userMessage, .botMessage, .optionButton {
+    border-radius: 10px;
+    padding: 10px 15px;
+    max-width: 80%;
+    word-wrap: break-word;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+.userMessage {
+    background-color: var(--user-message-bg-color);
+    color: white;
+    text-align: right;
+    align-self: flex-end;
+    margin-right: 10px;
+}
+
+.botMessage {
+    background-color: var(--bot-message-bg-color);
+    color: white;
+    text-align: left;
+    align-self: flex-start;
+    margin-left: 10px;
+}
+
+.optionButton {
+    background-color: var(--option-button-bg-color);
+    color: var(--option-button-text-color);
+    text-align: left;
+    align-self: flex-start;
+    cursor: pointer;
+}
+
+.userMessage::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: 15px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: var(--user-message-after-color);
+    border-bottom: 0;
+    border-right: 0;
+}
+
+.botMessage::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 15px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: var(--bot-message-after-color);
+    border-bottom: 0;
+    border-left: 0;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+#previousChatIndicatorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+}
+
+#previousChatIndicator {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 14px;
+    color: var(--previous-chat-indicator-text-color);
+    background-color: var(--previous-chat-indicator-bg);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.horizontalLine {
+    width: 100%;
+    height: 1px;
+    background-color: var(--previous-chat-indicator-bg);
+}
+
+@media (max-width: 600px) {
+    #chatInterface {
+        width: 90%;
+        height: 50%;
+    }
+
+    #conversation {
+        height: calc(100% - 100px);
+    }
+
+    #chatFooter {
+        flex-direction: column;
+        padding: 10px 5px;
+    }
+
+    #chatFooter input {
+        margin-bottom: 10px;
+    }
+
+    #chatFooter button {
+        width: 100%;
+    }
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.error-message.hidden {
+    display: none;
+}
+
+.error-icon {
+    margin-right: 10px;
+    font-size: 20px;
+    color: #721c24;
+}
+
+#maximizeChat, #minimizeChat, #closeChat {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: black;
+    transition: color 0.3s ease, transform 0.3s ease;
+    margin-left: 0px;
+}
+
+/* #clearChatHistory, #restoreChatHistory {
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    position: absolute;
+    top: 0;
+} */
+
+/* #clearChatHistory {
+    left: 0;
+}
+
+#restoreChatHistory {
+    right: 0;
+} */
+
+#maximizeChat:hover, #minimizeChat:hover {
+    color: var(--header-button-hover-color);
+    transform: scale(1.1);
+}
+
+#maximizeChat:active, #minimizeChat:active {
+    color: var(--header-button-active-color);
+}
+
+#chatInterface.maximized {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    border-radius: 0;
+    margin: 0;
+}
+
+</style>
+
+<script>
+var firstMessageShown = false; // Tracks if the initial message has been shown
+var previousChatLoaded = false; // Tracks if the previous chat history has been loaded
+var isDragging = false; // Tracks if the chat window is being dragged
+var offsetX, offsetY; // Variables to store the offset during drag
+var isMaximized = false;
+var previousDimensions = {};
+
+var initialMessage = "How can I help you today?";
+
+function getElementByIdSafe(id) {
+    var element = document.getElementById(id);
+    if (!element) {
+        console.error('Error: Element with ID "' + id + '" not found.');
+        displayErrorMessage('An unexpected error occurred. Please try again.');
+        throw new Error('Element with ID "' + id + '" not found.');
+    }
+    return element;
+}
+
+function createElementSafe(tagName) {
+    try {
+        return document.createElement(tagName);
+    } catch (e) {
+        console.error('Error creating element:', e);
+        displayErrorMessage('An unexpected error occurred. Please try again.');
+        throw e;
+    }
+}
+
+function getLocalStorageItem(key) {
+    try {
+        return localStorage.getItem(key);
+    } catch (e) {
+        console.error('Error getting item from localStorage:', e);
+        displayErrorMessage('An unexpected error occurred. Please try again.');
+        throw e;
+    }
+}
+
+function setLocalStorageItem(key, value) {
+    try {
+        localStorage.setItem(key, value);
+    } catch (e) {
+        console.error('Error setting item in localStorage:', e);
+        displayErrorMessage('An unexpected error occurred. Please try again.');
+        throw e;
+    }
+}
+
+function toggleChatbot() {
+    try {
+        var chatInterface = getElementByIdSafe('chatInterface');
+        var chatbotToggle = getElementByIdSafe('chatbotToggle');
+        // var restoreButton = getElementByIdSafe('restoreChatHistory');
+    } catch (e) {
+        console.error('Error toggling chatbot:', e);
+        return;
+    }
+
+    if (chatInterface.classList.contains('hidden')) {
+        chatInterface.classList.remove('hidden');
+        chatbotToggle.style.display = 'none';
+        loadMessagesFromLocalStorage();
+        if (!firstMessageShown && !previousChatLoaded) {
+            showMessage(initialMessage, false);
+            firstMessageShown = true;
+        }
+        // if (getLocalStorageItem('previousChatMessages')) {
+        //     restoreButton.classList.remove('hidden');
+        // } else {
+        //     restoreButton.classList.add('hidden');
+        // }
+    } else {
+        chatInterface.classList.add('hidden');
+        chatbotToggle.style.display = 'block';
+    }
+}
+
+function showMessage(message, isUser) {
+    try {
+        var conversationDiv = getElementByIdSafe('conversation');
+    } catch (e) {
+        console.error('Error showing message:', e);
+        return;
+    }
+
+    var messageRow = createElementSafe('div');
+    messageRow.className = 'messageRow';
+    var messageDiv = createElementSafe('div');
+    messageDiv.className = isUser ? 'userMessage' : 'botMessage';
+    messageDiv.appendChild(document.createTextNode(message));
+    if (isUser) {
+        messageRow.appendChild(createElementSafe('div')); // empty div for alignment
+        messageRow.appendChild(messageDiv);
+    } else {
+        messageRow.appendChild(messageDiv);
+        messageRow.appendChild(createElementSafe('div')); // empty div for alignment
+    }
+    conversationDiv.appendChild(messageRow);
+    conversationDiv.scrollTop = conversationDiv.scrollHeight;
+
+    saveMessagesToLocalStorage();
+}
+
+function saveMessagesToLocalStorage() {
+    try {
+        var conversationDiv = getElementByIdSafe('conversation');
+    } catch (e) {
+        console.error('Error saving messages to local storage:', e);
+        return;
+    }
+    var messages = [];
+    var messageElements = conversationDiv.getElementsByClassName('messageRow');
+    
+    for (var i = 0; i < messageElements.length; i++) {
+        var messageDiv = messageElements[i].querySelector('.botMessage, .userMessage');
+        var messageText = messageDiv ? messageDiv.innerText : '';
+        if (messageText) {
+            var isUser = messageDiv.classList.contains('userMessage');
+            messages.push({
+                text: messageText,
+                timestamp: new Date().toISOString(),
+                isUser: isUser
+            });
+        }
+    }
+    
+    setLocalStorageItem('chatMessages', JSON.stringify(messages));
+}
+
+
+
+function loadMessagesFromLocalStorage() {
+    var savedMessages = getLocalStorageItem('chatMessages');
+    var hasValidMessages = false; // Flag to track if valid messages are found
+
+    if (savedMessages) {
+        try {
+            var conversationDiv = getElementByIdSafe('conversation');
+        } catch (e) {
+            console.error('Error loading messages from local storage:', e);
+            return;
+        }
+
+        var messages;
+        try {
+            messages = JSON.parse(savedMessages);
+        } catch (e) {
+            console.error('Error parsing saved messages:', e);
+            return;
+        }
+
+        var oneDayAgo = new Date();
+        oneDayAgo.setDate(oneDayAgo.getDate() - 1);
+
+        conversationDiv.innerHTML = '';
+
+        messages.forEach(function(message) {
+            var messageTimestamp = new Date(message.timestamp);
+            if (messageTimestamp >= oneDayAgo) {
+                hasValidMessages = true; // Valid message found
+                var messageRow = createElementSafe('div');
+                messageRow.className = 'messageRow';
+                var messageDiv = createElementSafe('div');
+                messageDiv.className = message.isUser ? 'userMessage' : 'botMessage';
+                messageDiv.appendChild(document.createTextNode(message.text));
+                messageRow.appendChild(messageDiv);
+                conversationDiv.appendChild(messageRow);
+            }
+        });
+
+        conversationDiv.scrollTop = conversationDiv.scrollHeight;
+    }
+
+    // Show initial message if no valid messages are found
+    if (!hasValidMessages) {
+        showMessage(initialMessage, false);
+        firstMessageShown = true;
+    }
+}
+
+
+
+function removeConsecutiveDuplicateMessages(conversationDiv) {
+    var messageElements = conversationDiv.getElementsByClassName('botMessage');
+    var messageTextArray = [];
+    var lastMessage = "";
+
+    for (var i = 0; i < messageElements.length; i++) {
+        var messageText = messageElements[i].innerText;
+        if (messageText === initialMessage && lastMessage === initialMessage) {
+            messageElements[i].parentElement.remove();
+            i--; // Adjust the index after removal
+        } else {
+            lastMessage = messageText;
+            messageTextArray.push(messageText);
+        }
+    }
+}
+
+function clearChatHistory() {
+    localStorage.removeItem('chatMessages');
+    savePreviousChatHistory();
+    try {
+        var conversationDiv = getElementByIdSafe('conversation');
+        // var restoreButton = getElementByIdSafe('restoreChatHistory');
+    } catch (e) {
+        console.error('Error clearing chat history:', e);
+        return;
+    }
+    conversationDiv.innerHTML = '';
+    // restoreButton.classList.remove('hidden');
+}
+
+function savePreviousChatHistory() {
+    try {
+        var conversationDiv = getElementByIdSafe('conversation');
+    } catch (e) {
+        console.error('Error saving previous chat history:', e);
+        return;
+    }
+    var messages = conversationDiv.innerHTML;
+    setLocalStorageItem('previousChatMessages', messages);
+}
+
+function restoreChatHistory() {
+    var previousMessages = getLocalStorageItem('previousChatMessages');
+    if (previousMessages) {
+        try {
+            var conversationDiv = getElementByIdSafe('conversation');
+            var restoreButton = getElementByIdSafe('restoreChatHistory');
+        } catch (e) {
+            console.error('Error restoring chat history:', e);
+            return;
+        }
+        previousMessages = previousMessages.replace(/<div id="previousChatIndicator">Previous chat history above<\/div>/g, '');
+        var indicator = createElementSafe('div');
+        indicator.id = 'previousChatIndicator';
+        indicator.textContent = 'Previous chat history above';
+        conversationDiv.innerHTML = previousMessages + indicator.outerHTML;
+        saveMessagesToLocalStorage();
+        restoreButton.classList.add('hidden');
+        previousChatLoaded = true;
+        scrollToBottomWithAnimation(conversationDiv);
+    }
+}
+
+function scrollToBottomWithAnimation(element) {
+    element.scrollTop = element.scrollHeight;
+}
+
+function showOptions(options) {
+    try {
+        var conversationDiv = getElementByIdSafe('conversation');
+    } catch (e) {
+        console.error('Error showing options:', e);
+        return;
+    }
+    var optionsRow = createElementSafe('div');
+    optionsRow.className = 'messageRow';
+
+    options.forEach(function(option) {
+        var optionButton = createElementSafe('div');
+        optionButton.className = 'optionButton';
+        optionButton.textContent = option.text;
+        optionButton.onclick = function() {
+            var inputField = getElementByIdSafe('userInput');
+            inputField.value = option.value;
+            sendMessage();
+        };
+        optionsRow.appendChild(optionButton);
+    });
+
+    conversationDiv.appendChild(optionsRow);
+    conversationDiv.scrollTop = conversationDiv.scrollHeight;
+}
+
+function showError(message) {
+    try {
+        var inputField = getElementByIdSafe('userInput');
+    } catch (e) {
+        console.error('Error showing error message:', e);
+        return;
+    }
+    inputField.value = '';
+    inputField.placeholder = message;
+    inputField.classList.add('errorMessage');
+    inputField.style.borderColor = 'red';
+    inputField.oninput = function() {
+        inputField.placeholder = 'Type a message';
+        inputField.classList.remove('errorMessage');
+        inputField.style.borderColor = '';
+        inputField.style.color = 'black';
+        inputField.oninput = null;
+    };
+}
+
+function displayErrorMessage(message) {
+    try {
+        var errorMessageDiv = getElementByIdSafe('errorMessage');
+    } catch (e) {
+        console.error('Error displaying error message:', e);
+        return;
+    }
+    errorMessageDiv.textContent = message;
+    errorMessageDiv.classList.remove('hidden');
+    setTimeout(function() {
+        errorMessageDiv.classList.add('hidden');
+        errorMessageDiv.textContent = '';
+    }, 5000); // hide after 5 seconds
+}
+
+function sanitizeInput(input) {
+    input = input.replace(/<script[^>]*>([\S\s]*?)<\/script>/gim, "");
+    input = input.replace(/['"<>%;()&+]/g, "");
+    input = input.replace(/[^\w\s]/gi, "");
+    return input;
+}
+
+function sendMessage() {
+    var inputField, sendButton, loadingSpinner;
+
+    // Safely get elements by ID
+    try {
+        inputField = getElementByIdSafe('userInput');
+        sendButton = getElementByIdSafe('sendButton');
+        loadingSpinner = getElementByIdSafe('loadingSpinner');
+    } catch (e) {
+        // If any element is not found, log the error and exit
+        console.error('Initialization error:', e);
+        return;
+    }
+
+    var message = inputField.value.trim();
+
+    if (!message) {
+        showError('Please enter a message.');
+        return;
+    }
+
+    try {
+        message = sanitizeInput(message);
+    } catch (e) {
+        console.error('Error sanitizing input:', e);
+        displayErrorMessage('Error processing your message. Please try again.');
+        return;
+    }
+
+    try {
+        showMessage(message, true);
+    } catch (e) {
+        console.error('Error displaying message:', e);
+        displayErrorMessage('Error displaying your message. Please try again.');
+        return;
+    }
+
+    sendButton.disabled = true;
+    loadingSpinner.classList.remove('hidden');
+
+    var payload;
+    try {
+        payload = {
+            message: message,
+            userId: 'chatbot-demo-' + Date.now()
+        };
+    } catch (e) {
+        console.error('Error creating payload:', e);
+        displayErrorMessage('Error: Unable to create message payload.');
+        return;
+    }
+
+    var xhr;
+    try {
+        xhr = new XMLHttpRequest();
+        xhr.open('POST', 'YOUR_LEX_BOT_ENDPOINT_URL', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+    } catch (e) {
+        console.error('Error initializing XMLHttpRequest:', e);
+        displayErrorMessage('Error: Unable to initialize request.');
+        return;
+    }
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            sendButton.disabled = false;
+            loadingSpinner.classList.add('hidden');
+            if (xhr.status === 200) {
+                try {
+                    var data = JSON.parse(xhr.responseText);
+                    data.messages.forEach(function(msg) {
+                        try {
+                            if (msg.contentType === 'PlainText') {
+                                showMessage(msg.content, false);
+                            } else if (msg.contentType === 'ImageResponseCard' && msg.imageResponseCard.buttons) {
+                                showOptions(msg.imageResponseCard.buttons);
+                            }
+                        } catch (e) {
+                            console.error('Error displaying received message:', e);
+                            displayErrorMessage('Error displaying a received message.');
+                        }
+                    });
+                } catch (e) {
+                    console.error('Error parsing response:', e);
+                    displayErrorMessage('Error: Unable to parse response from the server.');
+                }
+            } else {
+                console.error('Error:', xhr.statusText);
+                displayErrorMessage('Error: ' + xhr.statusText);
+            }
+        }
+    };
+
+    xhr.onerror = function() {
+        sendButton.disabled = false;
+        loadingSpinner.classList.add('hidden');
+        console.error('Request failed');
+        displayErrorMessage('Error: Request failed. Please check your internet connection and try again.');
+    };
+
+    try {
+        xhr.send(JSON.stringify(payload));
+    } catch (e) {
+        sendButton.disabled = false;
+        loadingSpinner.classList.add('hidden');
+        console.error('Error sending payload:', e);
+        displayErrorMessage('Error: Failed to send message. Please try again.');
+    }
+
+    inputField.value = '';
+}
+
+function onDragStart(event) {
+    isDragging = true;
+    var chatInterface;
+    try {
+        chatInterface = getElementByIdSafe('chatInterface');
+    } catch (e) {
+        console.error('Error during drag start:', e);
+        return;
+    }
+    offsetX = event.clientX - chatInterface.getBoundingClientRect().left;
+    offsetY = event.clientY - chatInterface.getBoundingClientRect().top;
+    document.addEventListener('mousemove', onDrag);
+    document.addEventListener('mouseup', onDragEnd);
+}
+
+function onDrag(event) {
+    if (!isDragging) return;
+    var chatInterface;
+    try {
+        chatInterface = getElementByIdSafe('chatInterface');
+    } catch (e) {
+        console.error('Error during drag:', e);
+        return;
+    }
+    var newLeft = event.clientX - offsetX;
+    var newTop = event.clientY - offsetY;
+
+    var minLeft = 0;
+    var maxLeft = window.innerWidth - chatInterface.offsetWidth;
+    var minTop = 0;
+    var maxTop = window.innerHeight - chatInterface.offsetHeight;
+
+    newLeft = Math.max(minLeft, Math.min(newLeft, maxLeft));
+    newTop = Math.max(minTop, Math.min(newTop, maxTop));
+
+    chatInterface.style.left = newLeft + 'px';
+    chatInterface.style.top = newTop + 'px';
+}
+
+function onDragEnd() {
+    isDragging = false;
+    document.removeEventListener('mousemove', onDrag);
+    document.removeEventListener('mouseup', onDragEnd);
+}
+
+function onResizeStart(event, direction) {
+    isResizing = true;
+    resizeDirection = direction;
+    startX = event.clientX;
+    startY = event.clientY;
+    startWidth = parseInt(document.defaultView.getComputedStyle(chatInterface).width, 10);
+    startHeight = parseInt(document.defaultView.getComputedStyle(chatInterface).height, 10);
+    startLeft = chatInterface.getBoundingClientRect().left;
+    startTop = chatInterface.getBoundingClientRect().top;
+    document.addEventListener('mousemove', onResize);
+    document.addEventListener('mouseup', onResizeEnd);
+}
+
+function onResize(event) {
+    if (!isResizing) return;
+
+    const minWidth = 300;
+    const minHeight = 400;
+    const maxWidth = window.innerWidth - 20;  // Adjust based on your padding
+    const maxHeight = window.innerHeight - 20;  // Adjust based on your padding
+
+    if (resizeDirection.includes('right')) {
+        let newWidth = startWidth + (event.clientX - startX);
+        if (newWidth >= minWidth && (startLeft + newWidth) <= maxWidth) {
+            chatInterface.style.width = newWidth + 'px';
+        }
+    }
+    if (resizeDirection.includes('bottom')) {
+        let newHeight = startHeight + (event.clientY - startY);
+        if (newHeight >= minHeight && (startTop + newHeight) <= maxHeight) {
+            chatInterface.style.height = newHeight + 'px';
+        }
+    }
+    if (resizeDirection.includes('left')) {
+        let newWidth = startWidth - (event.clientX - startX);
+        if (newWidth >= minWidth && (startLeft + (event.clientX - startX)) >= 0) {
+            chatInterface.style.width = newWidth + 'px';
+            chatInterface.style.left = startLeft + (event.clientX - startX) + 'px';
+        }
+    }
+    if (resizeDirection.includes('top')) {
+        let newHeight = startHeight - (event.clientY - startY);
+        if (newHeight >= minHeight && (startTop + (event.clientY - startY)) >= 0) {
+            chatInterface.style.height = newHeight + 'px';
+            chatInterface.style.top = startTop + (event.clientY - startY) + 'px';
+        }
+    }
+}
+
+function onResizeEnd() {
+    isResizing = false;
+    document.removeEventListener('mousemove', onResize);
+    document.removeEventListener('mouseup', onResizeEnd);
+}
+
+var chatInterface = getElementByIdSafe('chatInterface');
+var isResizing = false;
+var resizeDirection = '';
+
+document.getElementById('resize-top').addEventListener('mousedown', function(event) {
+    onResizeStart(event, 'top');
+});
+document.getElementById('resize-right').addEventListener('mousedown', function(event) {
+    onResizeStart(event, 'right');
+});
+document.getElementById('resize-bottom').addEventListener('mousedown', function(event) {
+    onResizeStart(event, 'bottom');
+});
+document.getElementById('resize-left').addEventListener('mousedown', function(event) {
+    onResizeStart(event, 'left');
+});
+document.getElementById('resize-top-left').addEventListener('mousedown', function(event) {
+    onResizeStart(event, 'top-left');
+});
+document.getElementById('resize-top-right').addEventListener('mousedown', function(event) {
+    onResizeStart(event, 'top-right');
+});
+document.getElementById('resize-bottom-left').addEventListener('mousedown', function(event) {
+    onResizeStart(event, 'bottom-left');
+});
+document.getElementById('resize-bottom-right').addEventListener('mousedown', function(event) {
+    onResizeStart(event, 'bottom-right');
+});
+
+try {
+    getElementByIdSafe('chatHeader').addEventListener('mousedown', onDragStart);
+} catch (e) {
+    console.error('Error attaching drag start event:', e);
+}
+
+try {
+    getElementByIdSafe('chatInterface').style.cursor = 'default';
+} catch (e) {
+    console.error('Error setting cursor style:', e);
+}
+
+function maximizeChat() {
+    var chatInterface = getElementByIdSafe('chatInterface');
+    if (!isMaximized) {
+        previousDimensions = {
+            width: chatInterface.style.width,
+            height: chatInterface.style.height,
+            top: chatInterface.style.top,
+            left: chatInterface.style.left
+        };
+        chatInterface.classList.add('maximized');
+        chatInterface.style.width = '100vw';
+        chatInterface.style.height = '100vh';
+        chatInterface.style.top = '0';
+        chatInterface.style.left = '0';
+        isMaximized = true;
+    } else {
+        chatInterface.classList.remove('maximized');
+        chatInterface.style.width = previousDimensions.width;
+        chatInterface.style.height = previousDimensions.height;
+        chatInterface.style.top = previousDimensions.top;
+        chatInterface.style.left = previousDimensions.left;
+        isMaximized = false;
+    }
+}
+
+function minimizeChat() {
+    var chatInterface = getElementByIdSafe('chatInterface');
+    chatInterface.classList.add('hidden');
+    var chatbotToggle = getElementByIdSafe('chatbotToggle');
+    chatbotToggle.style.display = 'block';
+}
+</script>
