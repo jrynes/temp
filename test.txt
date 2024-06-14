@@ -1,0 +1,31 @@
+Step,Test Step,Expected Result
+1,Open the web page containing the chatbot.,The web page loads successfully.
+2,Locate the chatbot toggle button (with `+` symbol).,The chatbot toggle button is visible on the page.
+3,Click the chatbot toggle button.,The chatbot window opens, showing the initial message and options.
+4,Verify the initial message is displayed in the chatbot.,The initial message "How can I help you today?" is displayed.
+5,Click the maximize button in the top right corner of the chatbot.,The chatbot window maximizes to fill the available screen space.
+6,Click the minimize button in the top right corner of the chatbot.,The chatbot window minimizes to its original size.
+7,Click the close button (`X`) in the top right corner of the chatbot.,The chatbot window closes.
+8,Re-open the chatbot by clicking the chatbot toggle button.,The chatbot window opens again, showing previous chat history if any.
+9,Enter a message in the input field and press Enter.,The message appears in the chat window as a user message.
+10,Verify the bot response to the user message.,The bot responds with an appropriate message.
+11,Click the "Clear" button to clear chat history.,The chat history is cleared, and the "Restore" button becomes visible.
+12,Click the "Restore" button to restore previous chat history.,The previous chat history is restored in the chat window.
+13,Resize the chatbot window by dragging the bottom right corner.,The chatbot window resizes appropriately.
+14,Resize the chatbot window by dragging the bottom left corner.,The chatbot window resizes appropriately.
+15,Resize the chatbot window by dragging the top right corner.,The chatbot window resizes appropriately.
+16,Resize the chatbot window by dragging the top left corner.,The chatbot window resizes appropriately.
+17,Try to resize the chatbot window off the screen.,The chatbot window does not go off the screen.
+18,Drag the chatbot window to a new position on the screen.,The chatbot window moves to the new position.
+19,Verify that the chatbot window can be dragged and dropped at different positions.,The chatbot window moves as expected and stays within the screen boundaries.
+20,Verify the loading spinner appears when sending a message.,The loading spinner is visible while the bot processes the message.
+21,Verify the loading spinner disappears after receiving the bot response.,The loading spinner disappears once the bot responds.
+22,Enter invalid characters in the input field and press Enter.,The input is sanitized, and no invalid characters are sent.
+23,Verify the tooltip appears on hover over the maximize button.,The tooltip with text "Maximize" appears.
+24,Verify the tooltip appears on hover over the minimize button.,The tooltip with text "Minimize" appears.
+25,Verify the tooltip appears on hover over the close button.,The tooltip with text "Close" appears.
+26,Verify the chat window maintains its state after page refresh.,The chat window maintains its size, position, and history after refreshing the page.
+27,Verify that clicking outside the chat window does not close it.,The chat window remains open.
+28,Verify the input field placeholder text is "Type a message".,The input field displays the placeholder text "Type a message".
+29,Verify the error message appears when sending an empty message.,An error message "Please enter a message." is displayed.
+30,Verify the bot handles multiple consecutive messages correctly.,The bot responds appropriately to each user message without errors.
