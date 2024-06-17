@@ -1,0 +1,49 @@
+Description:
+Purpose:
+This change set introduces a JavaScript widget for a chatbot interface with the following functionalities:
+
+Chatbot Interface Toggle:
+
+Toggle visibility using a button.
+Displays initial message upon first opening.
+Message Handling:
+
+Displays user and bot messages.
+Saves chat messages to local storage for persistence.
+Supports restoration of previous chat history.
+Error Handling:
+
+Displays error messages in the chat interface.
+Sanitizes user input to prevent injection attacks.
+Drag and Resize Functionality:
+
+Draggable chat window.
+Resizable from all sides and corners.
+Supports maximizing to full screen and restoring to previous dimensions.
+Options Handling:
+
+Displays option buttons for predefined responses.
+Compatibility Enhancements:
+
+Ensures compatibility with older JavaScript environments (replaced Array.from with Array.prototype.slice.call, replaced includes with indexOf).
+Key Files:
+
+HTML Structure: Defines the chatbot interface structure, including chat window, buttons, and resize handles.
+CSS Styles: Provides styling for the chat interface and its components.
+JavaScript Logic: Implements functionalities for toggling, message handling, error handling, drag, resize, and maximizing/minimizing the chat window.
+Usage:
+
+Toggle Chatbot: Click the chatbot toggle button to open or close the chat window.
+Send Message: Type a message in the input field and press enter or click the send button.
+Drag Chat Window: Click and hold the chat header to drag the chat window around the screen.
+Resize Chat Window: Click and hold the resize handles on the edges and corners.
+Maximize/Minimize: Use the maximize and minimize buttons to toggle between full-screen and previous dimensions.
+Installation:
+
+Copy the provided HTML, CSS, and JavaScript code into the respective sections of your ServiceNow widget.
+Ensure local storage APIs are supported and accessible in your environment.
+Test thoroughly to ensure all functionalities work as expected.
+Notes:
+
+Designed for environments with limited support for newer JavaScript features.
+Review and adapt the code as necessary for your specific requirements or constraints.
