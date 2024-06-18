@@ -1,0 +1,50 @@
+// Function to handle resizing the chat interface
+function onResize(event) {
+    if (!isResizing) return;
+
+    const minWidth = 18.75; // 300px to rem
+    const minHeight = 25; // 400px to rem
+    const maxWidth = window.innerWidth - 20; // Adjust based on your padding
+    const maxHeight = window.innerHeight - 20; // Adjust based on your padding
+
+    if (resizeDirection.indexOf('right') !== -1) {
+        var newWidth = startWidth + (event.clientX - startX) / 16; // Convert px to rem
+        if (newWidth >= minWidth && (startLeft + newWidth * 16) <= maxWidth) {
+            chatInterface.style.width = newWidth + 'rem';
+        }
+    }
+    if (resizeDirection.indexOf('bottom') !== -1) {
+        var newHeight = startHeight + (event.clientY - startY) / 16; // Convert px to rem
+        if (newHeight >= minHeight && (startTop + newHeight * 16) <= maxHeight) {
+            chatInterface.style.height = newHeight + 'rem';
+        }
+    }
+    if (resizeDirection.indexOf('left') !== -1) {
+        var newWidth = startWidth - (event.clientX - startX) / 16; // Convert px to rem
+        if (newWidth >= minWidth && (startLeft + (event.clientX - startX)) >= 0) {
+            chatInterface.style.width = newWidth + 'rem';
+            chatInterface.style.left = (startLeft + (event.clientX - startX)) + 'px';
+        }
+    }
+    if (resizeDirection.indexOf('top') !== -1) {
+        var newHeight = startHeight - (event.clientY - startY) / 16; // Convert px to rem
+        if (newHeight >= minHeight && (startTop + (event.clientY - startY)) >= 0) {
+            chatInterface.style.height = newHeight + 'rem';
+            chatInterface.style.top = (startTop + (event.clientY - startY)) + 'px';
+        }
+    }
+}
+
+// Function to handle the start of a resize event
+function onResizeStart(event, direction) {
+    isResizing = true;
+    resizeDirection = direction;
+    startX = event.clientX;
+    startY = event.clientY;
+    startWidth = parseInt(document.defaultView.getComputedStyle(chatInterface).width, 10) / 16; // Convert px to rem
+    startHeight = parseInt(document.defaultView.getComputedStyle(chatInterface).height, 10) / 16; // Convert px to rem
+    startLeft = chatInterface.getBoundingClientRect().left;
+    startTop = chatInterface.getBoundingClientRect().top;
+    document.addEventListener('mousemove', onResize);
+    document.addEventListener('mouseup', onResizeEnd);
+}
