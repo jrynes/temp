@@ -1,0 +1,706 @@
+/* Define CSS variables for colors and other properties */
+:root {
+    --primary-color: #007bff;
+    --primary-color-hover: #0056b3;
+    --user-message-bg-color: #28a745;
+    --bot-message-bg-color: #0a84ff;
+    --option-button-bg-color: #f1f1f1;
+    --option-button-text-color: black;
+    --box-shadow-color: rgba(0, 0, 0, 0.1);
+    --user-message-after-color: #28a745;
+    --bot-message-after-color: #0a84ff;
+    --header-bg-color: #f1f1f1;
+    --header-button-hover-color: #d9534f;
+    --header-button-active-color: #c9302c;
+    --footer-bg-color: #f1f1f1;
+    --footer-input-border-color: #ccc;
+    --footer-input-error-color: red;
+    --footer-button-hover-bg-color: #218838;
+    --footer-button-active-bg-color: #1e7e34;
+    --spinner-border-color: rgba(0, 0, 0, 0.1);
+    --spinner-top-border-color: #28a745;
+    --previous-chat-indicator-bg: #707070;
+    --previous-chat-indicator-text-color: #fff;
+    --bubble-shadow: rgba(0, 0, 0, 0.3);
+    --bubble-shadow-hover: rgba(0, 0, 0, 0.5);
+}
+
+/* Set the default font for the body */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Styles for the chatbot container */
+#chatbotContainer {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+/* Styles for the chatbot toggle button */
+#chatbotToggle {
+    background-color: transparent; 
+    color: transparent;
+    border: none;
+    border-radius: 50%;
+    width: 5rem; 
+    height: 5rem; 
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    animation: bounceIn 0.5s;
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+/* Styles for the chat bubble SVG */
+.chatBubble {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: bounceIn 0.5s;
+    box-shadow: 0 0.25rem 0.5rem var(--bubble-shadow);
+}
+
+.chatBubble:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0.5rem 1rem var(--bubble-shadow-hover);
+}
+
+/* Styles for the main SVG path */
+.cls-1 {
+    fill: var(--primary-color);
+    filter: drop-shadow(0 0.25rem 0.25rem var(--bubble-shadow));
+    transition: transform 0.3s ease, box-shadow 0.3s ease, fill 0.3s ease;
+}
+
+.cls-1:hover {
+    fill: var(--primary-color-hover);
+    transform: scale(1.02);
+    filter: drop-shadow(0 0.25rem 0.25rem var(--bubble-shadow-hover));
+}
+
+/* Styles for the SVG text */
+.cls-2 {
+    fill: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    pointer-events: none;
+    transition: transform 0.3s ease;
+}
+
+.cls-2:hover {
+    font-size: 2.1rem;
+}
+
+/* Styles to hide the chat interface */
+#chatInterface.hidden {
+    display: none;
+}
+
+/* Styles for the chat interface */
+#chatInterface {
+    border: 1px solid var(--footer-input-border-color);
+    border-radius: 0.625rem;
+    width: 18.75rem;
+    height: 25rem;
+    background-color: white;
+    box-shadow: 0 0 0.625rem var(--box-shadow-color);
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    animation: fadeIn 0.5s;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    overflow: hidden;
+    min-width: 18.75rem;
+    min-height: 25rem;
+}
+
+/* Common resize styles */
+.resize {
+    position: absolute;
+    z-index: 1001;
+    cursor: ns-resize;
+}
+
+/* Styles for horizontal resize handles */
+.resize.horizontal {
+    width: 0.3125rem;
+    cursor: ew-resize;
+}
+
+/* Styles for corner resize handles */
+.resize.corner {
+    width: 0.625rem;
+    height: 0.625rem;
+}
+
+#resize-top, #resize-bottom {
+    height: 0.3125rem;
+    left: 0;
+    right: 0;
+    cursor: ns-resize;
+}
+
+#resize-left, #resize-right {
+    top: 0;
+    bottom: 0;
+}
+
+#resize-top-left, #resize-top-right, #resize-bottom-left, #resize-bottom-right {
+    cursor: nwse-resize;
+}
+
+#resize-top-right, #resize-bottom-left {
+    cursor: nesw-resize;
+}
+
+#resize-top {
+    top: 0;
+}
+
+#resize-bottom {
+    bottom: 0;
+}
+
+#resize-left {
+    left: 0;
+}
+
+#resize-right {
+    right: 0;
+}
+
+#resize-top-left {
+    top: 0;
+    left: 0;
+}
+
+#resize-top-right {
+    top: 0;
+    right: 0;
+}
+
+#resize-bottom-left {
+    bottom: 0;
+    left: 0;
+}
+
+#resize-bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+/* Common header styles */
+#chatHeader, .button-common {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: black;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Styles for the chat header */
+#chatHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.625rem;
+    background-color: var(--header-bg-color);
+    border-bottom: 1px solid var(--footer-input-border-color);
+    border-radius: 0.625rem 0.625rem 0 0;
+    cursor: move;
+}
+
+#chatHeader span {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+#chatHeader button:hover, #maximizeChat:hover, #minimizeChat:hover, #closeChat:hover {
+    color: var(--header-button-hover-color);
+    transform: scale(1.1);
+}
+
+#chatHeader button:active, #maximizeChat:active, #minimizeChat:active, #closeChat:active {
+    color: var(--header-button-active-color);
+}
+
+/* Styles for the chat footer */
+#chatFooter {
+    display: flex;
+    padding: 0.625rem;
+    background-color: var(--footer-bg-color);
+    border-top: 1px solid var(--footer-input-border-color);
+    border-radius: 0 0 0.625rem 0.625rem;
+    position: relative;
+}
+
+#chatFooter input {
+    flex: 1;
+    border: 1px solid var(--footer-input-border-color);
+    border-radius: 0.3125rem;
+    padding: 0.3125rem;
+    margin-right: 0.3125rem;
+    font-family: Arial, sans-serif;
+}
+
+#chatFooter input.errorMessage {
+    color: var(--footer-input-error-color);
+}
+
+/* Common button styles */
+.button-common {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 0.3125rem;
+    color: white;
+    cursor: pointer;
+    padding: 0.3125rem 0.625rem;
+}
+
+/* Styles for chat buttons in the footer */
+#chatFooter button, #clearChatHistory, #restoreChatHistory {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    stroke: none;
+    font-weight: 700;
+    font-size: 0.875rem;
+}
+
+#chatFooter button:hover, #clearChatHistory:hover, #restoreChatHistory:hover {
+    transform: scale(1.05);
+}
+
+#chatFooter button:active, #clearChatHistory:active, #restoreChatHistory:active {
+    background-color: var(--footer-button-active-bg-color);
+}
+
+/* Hover effect for buttons in the chat footer */
+#chatFooter button:before {
+    content: "";
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    top: 50%;
+    left: 50%;
+    pointer-events: none;
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    border-radius: 50%;
+}
+
+#chatFooter button:hover:before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Styles for the loading spinner */
+.spinner {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 0.25rem solid var(--spinner-border-color);
+    border-top-color: var(--spinner-top-border-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    right: 0.3125rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Hidden class for elements that should not be displayed */
+.hidden {
+    display: none;
+}
+
+/* Styles for the button container */
+#buttonContainer {
+    display: flex;
+    position: relative;
+    height: 1.875rem;
+    width: 12.5rem;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+/* Styles for the disclaimer section */
+#disclaimer {
+    display: flex;
+    align-items: center;
+    padding: 0.625rem;
+    background-color: var(--header-bg-color);
+    border-bottom: 1px solid var(--footer-input-border-color);
+    font-size: 0.75rem;
+    color: #333;
+}
+
+#disclaimer svg {
+    margin-right: 0.625rem;
+}
+
+/* Keyframes for spin animation */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Keyframes for bounce-in animation */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Keyframes for fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Styles for chat message rows */
+.messageRow {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.3125rem 0;
+}
+
+/* Styles for user and bot messages */
+.userMessage, .botMessage, .optionButton {
+    border-radius: 0.625rem;
+    padding: 0.625rem 0.9375rem;
+    max-width: 80%;
+    word-wrap: break-word;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+.optionButton:hover {
+    background-color: var(--primary-color-hover);
+    color: #ffffff;
+    border-color: var(--primary-color-hover);
+}
+
+.userMessage {
+    background-color: var(--user-message-bg-color);
+    color: white;
+    text-align: right;
+    align-self: flex-end;
+    margin-left: auto;
+    margin-right: 0.625rem;
+}
+
+.botMessage {
+    background-color: var(--bot-message-bg-color);
+    color: white;
+    text-align: left;
+    align-self: flex-start;
+    margin-left: 0.625rem;
+    margin-right: auto;
+}
+
+.optionButton {
+    background-color: var(--option-button-bg-color);
+    color: var(--option-button-text-color);
+    text-align: left;
+    align-self: flex-start;
+    cursor: pointer;
+    margin-left: 0.9375rem;
+    margin-right: auto;
+}
+
+/* Arrow styles for user and bot messages */
+.userMessage::after, .botMessage::after {
+    content: '';
+    position: absolute;
+    bottom: -0.625rem;
+    width: 0;
+    height: 0;
+    border: 0.625rem solid transparent;
+}
+
+.userMessage::after {
+    right: 0.9375rem;
+    border-top-color: var(--user-message-after-color);
+    border-bottom: 0;
+    border-right: 0;
+}
+
+.botMessage::after {
+    left: 0.9375rem;
+    border-top-color: var(--bot-message-after-color);
+    border-bottom: 0;
+    border-left: 0;
+}
+
+/* Visually hidden class for screen readers */
+.visually-hidden {
+    position: absolute;
+    width: 0.0625rem;
+    height: 0.0625rem;
+    margin: -0.0625rem;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Styles for the previous chat indicator */
+#previousChatIndicatorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.625rem 0;
+}
+
+#previousChatIndicator {
+    text-align: center;
+    margin: 0.625rem 0;
+    font-size: 0.875rem;
+    color: var(--previous-chat-indicator-text-color);
+    background-color: var(--previous-chat-indicator-bg);
+    padding: 0.3125rem 0.625rem;
+    border-radius: 0.3125rem;
+}
+
+/* Styles for horizontal line */
+.horizontalLine {
+    width: 100%;
+    height: 0.0625rem;
+    background-color: var(--previous-chat-indicator-bg);
+}
+
+/* Media query for responsive design */
+@media (max-width: 600px) {
+    #chatInterface {
+        width: 90%;
+        height: 50%;
+    }
+
+    #conversation {
+        height: calc(100% - 6.25rem);
+    }
+
+    #chatFooter {
+        flex-direction: column;
+        padding: 0.625rem 0.3125rem;
+    }
+
+    #chatFooter input {
+        margin-bottom: 0.625rem;
+    }
+
+    #chatFooter button {
+        width: 100%;
+    }
+}
+
+/* Styles for error messages */
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 0.625rem;
+    border-radius: 0.3125rem;
+    margin: 0.625rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.error-message.hidden {
+    display: none;
+}
+
+/* Styles for error icon */
+.error-icon {
+    margin-right: 0.625rem;
+    font-size: 1.25rem;
+    color: #721c24;
+}
+
+/* Additional styles for chat buttons */
+#maximizeChat, #minimizeChat, #closeChat {
+    margin-left: 0;
+    border: none;
+}
+
+/* Styles for maximized chat interface */
+#chatInterface.maximized {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    border-radius: 0;
+    margin: 0;
+}
+
+/* Styles for the send button */
+#sendButton {
+    background-color: var(--user-message-bg-color);
+    border: none;
+    border-radius: 0.3125rem;
+    color: white;
+    cursor: pointer;
+    padding: 0.3125rem 0.625rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#sendButton:hover {
+    background-color: var(--footer-button-hover-bg-color);
+    box-shadow: 0 0 0.625rem var(--box-shadow-color);
+    transform: scale(1.05);
+}
+
+#sendButton:active {
+    background-color: var(--footer-button-active-bg-color);
+}
+
+#sendButton svg {
+    fill: currentColor;
+    transition: fill 0.3s ease;
+}
+
+#sendButton:hover svg {
+    fill: currentColor;
+}
+
+#sendButton:active svg {
+    fill: currentColor;
+}
+
+/* Hover effect for the send button */
+#sendButton:before {
+    content: "";
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    top: 50%;
+    left: 50%;
+    pointer-events: none;
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    border-radius: 50%;
+}
+
+#sendButton:hover:before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Media query for tablets and mobile devices */
+@media (max-width: 768px) {
+    #chatInterface {
+        width: 80%;
+        height: 60%;
+        bottom: 0.625rem;
+        right: 10%;
+    }
+
+    #chatbotToggle {
+        width: 3.75rem; 
+        height: 3.75rem; 
+        bottom: 0.625rem; 
+        right: 0.625rem;
+        z-index: 1001; /* Ensure it is above other elements */
+    }
+
+    #chatFooter {
+        flex-direction: column;
+        padding: 0.625rem 0.3125rem;
+    }
+
+    #chatFooter input {
+        margin-bottom: 0.625rem;
+    }
+
+    #chatFooter button {
+        width: 100%;
+    }
+
+    .messageRow {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .userMessage, .botMessage, .optionButton {
+        max-width: 100%;
+        margin-bottom: 0.625rem;
+    }
+}
+
+/* Media query for small mobile devices */
+@media (max-width: 480px) {
+    #chatInterface {
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        right: 0;
+        border-radius: 0;
+    }
+
+    #chatbotToggle {
+        width: 3.125rem; 
+        height: 3.125rem; 
+        bottom: 0.625rem; 
+        right: 0.625rem;
+        z-index: 1001; /* Ensure it is above other elements */
+    }
+
+    #chatHeader {
+        padding: 0.625rem 0.3125rem;
+    }
+
+    #chatHeader span {
+        font-size: 0.875rem;
+    }
+
+    #chatFooter {
+        padding: 0.625rem 0.3125rem;
+    }
+
+    #chatFooter input {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+    }
+
+    #chatFooter button {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+        width: 100%;
+    }
+
+    .messageRow {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .userMessage, .botMessage, .optionButton {
+        max-width: 100%;
+        margin-bottom: 0.625rem;
+    }
+
+    .cls-2 {
+        font-size: 1.5rem;
+    }
+}
