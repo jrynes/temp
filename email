@@ -4,3 +4,36 @@
                 <path fill="currentColor" d="M21 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2l9 5 9-5zm-9 7l-9-5v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8l-9 5z"/>
             </svg>
         </button>
+
+
+
+
+#sendEmail {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    color: inherit;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+#sendEmail:hover {
+    color: var(--header-button-hover-color);
+    transform: scale(1.1);
+}
+
+#sendEmail:active {
+    color: var(--header-button-active-color);
+}
+
+
+
+function sendEmail() {
+    var email = "example@example.com"; // Replace with your email address
+    var subject = encodeURIComponent("Subject of the email");
+    var body = encodeURIComponent("Body of the email");
+
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+}
+
+
