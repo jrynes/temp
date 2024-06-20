@@ -1,0 +1,92 @@
+    <button id="collapseDisclaimer" onclick="toggleDisclaimer()" aria-label="Collapse disclaimer" title="Collapse disclaimer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="20" x2="20" y2="20"></line>
+        </svg>
+    </button>
+
+
+
+
+#collapseDisclaimer {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    color: inherit;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+#collapseDisclaimer:hover {
+    color: var(--header-button-hover-color);
+    transform: scale(1.1);
+}
+
+#collapseDisclaimer:active {
+    color: var(--header-button-active-color);
+}
+
+/* Initially hide the collapse button if the chatbot is maximized */
+#chatInterface.maximized #collapseDisclaimer {
+    display: none;
+}
+
+#chatInterface:not(.maximized) #collapseDisclaimer {
+    display: inline-block;
+}
+
+
+
+
+function toggleDisclaimer() {
+    var disclaimer = document.getElementById('disclaimer');
+    if (disclaimer.style.display === 'none') {
+        disclaimer.style.display = 'flex';
+    } else {
+        disclaimer.style.display = 'none';
+    }
+}
+
+function maximizeChat() {
+    var chatInterface = getElementByIdSafe('chatInterface');
+    var disclaimer = getElementByIdSafe('disclaimer');
+    var collapseDisclaimerButton = getElementByIdSafe('collapseDisclaimer');
+    if (!isMaximized) {
+        previousDimensions = {
+            width: chatInterface.style.width,
+            height: chatInterface.style.height,
+            top: chatInterface.style.top,
+            left: chatInterface.style.left
+        };
+        chatInterface.classList.add('maximized');
+        chatInterface.style.width = '100vw';
+        chatInterface.style.height = '100vh';
+        chatInterface.style.top = '0';
+        chatInterface.style.left = '0';
+        isMaximized = true;
+        collapseDisclaimerButton.style.display = 'none';
+        disclaimer.style.display = 'flex'; // Show disclaimer when maximized
+    } else {
+        chatInterface.classList.remove('maximized');
+        chatInterface.style.width = previousDimensions.width;
+        chatInterface.style.height = previousDimensions.height;
+        chatInterface.style.top = previousDimensions.top;
+        chatInterface.style.left = previousDimensions.left;
+        isMaximized = false;
+        collapseDisclaimerButton.style.display = 'inline-block';
+    }
+}
+
+// Adjust the initialization to ensure disclaimer is correctly handled on load
+document.addEventListener('DOMContentLoaded', function() {
+    var chatInterface = getElementByIdSafe('chatInterface');
+    var collapseDisclaimerButton = getElementByIdSafe('collapseDisclaimer');
+    var disclaimer = getElementByIdSafe('disclaimer');
+    if (chatInterface.classList.contains('maximized')) {
+        collapseDisclaimerButton.style.display = 'none';
+        disclaimer.style.display = 'flex';
+    } else {
+        collapseDisclaimerButton.style.display = 'inline-block';
+        disclaimer.style.display = 'none';
+    }
+});
+
