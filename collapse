@@ -1,31 +1,49 @@
     <button id="collapseDisclaimer" onclick="toggleDisclaimer()" aria-label="Collapse disclaimer" title="Collapse disclaimer">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="4" y1="20" x2="20" y2="20"></line>
+            <polyline points="6 9 12 15 18 9"></polyline>
         </svg>
     </button>
+</div>
+<button id="expandDisclaimer" class="hidden" onclick="toggleDisclaimer()" aria-label="Expand disclaimer" title="Expand disclaimer">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+    <span>Disclaimer - Work in Progress</span>
+</button>
 
 
 
 
-#collapseDisclaimer {
+#collapseDisclaimer,
+#expandDisclaimer {
     background: none;
     border: none;
     cursor: pointer;
-    margin-left: 10px;
     color: inherit;
     transition: transform 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-#collapseDisclaimer:hover {
+#collapseDisclaimer:hover,
+#expandDisclaimer:hover {
     color: var(--header-button-hover-color);
     transform: scale(1.1);
 }
 
-#collapseDisclaimer:active {
+#collapseDisclaimer:active,
+#expandDisclaimer:active {
     color: var(--header-button-active-color);
 }
 
-/* Initially hide the collapse button if the chatbot is maximized */
+#expandDisclaimer {
+    display: none;
+    margin: 10px 0;
+    color: var(--header-button-hover-color);
+    font-size: 14px;
+}
+
 #chatInterface.maximized #collapseDisclaimer {
     display: none;
 }
@@ -34,15 +52,27 @@
     display: inline-block;
 }
 
+.hidden {
+    display: none;
+}
+
 
 
 
 function toggleDisclaimer() {
     var disclaimer = document.getElementById('disclaimer');
-    if (disclaimer.style.display === 'none') {
-        disclaimer.style.display = 'flex';
+    var disclaimerText = document.getElementById('disclaimerText');
+    var collapseDisclaimer = document.getElementById('collapseDisclaimer');
+    var expandDisclaimer = document.getElementById('expandDisclaimer');
+
+    if (disclaimerText.style.display === 'none') {
+        disclaimerText.style.display = 'block';
+        collapseDisclaimer.style.display = 'inline-block';
+        expandDisclaimer.style.display = 'none';
     } else {
-        disclaimer.style.display = 'none';
+        disclaimerText.style.display = 'none';
+        collapseDisclaimer.style.display = 'none';
+        expandDisclaimer.style.display = 'flex';
     }
 }
 
@@ -50,6 +80,7 @@ function maximizeChat() {
     var chatInterface = getElementByIdSafe('chatInterface');
     var disclaimer = getElementByIdSafe('disclaimer');
     var collapseDisclaimerButton = getElementByIdSafe('collapseDisclaimer');
+    var expandDisclaimerButton = getElementByIdSafe('expandDisclaimer');
     if (!isMaximized) {
         previousDimensions = {
             width: chatInterface.style.width,
@@ -64,7 +95,8 @@ function maximizeChat() {
         chatInterface.style.left = '0';
         isMaximized = true;
         collapseDisclaimerButton.style.display = 'none';
-        disclaimer.style.display = 'flex'; // Show disclaimer when maximized
+        expandDisclaimerButton.style.display = 'none';
+        disclaimer.style.display = 'flex';
     } else {
         chatInterface.classList.remove('maximized');
         chatInterface.style.width = previousDimensions.width;
@@ -73,6 +105,7 @@ function maximizeChat() {
         chatInterface.style.left = previousDimensions.left;
         isMaximized = false;
         collapseDisclaimerButton.style.display = 'inline-block';
+        expandDisclaimerButton.style.display = 'flex';
     }
 }
 
@@ -80,13 +113,6 @@ function maximizeChat() {
 document.addEventListener('DOMContentLoaded', function() {
     var chatInterface = getElementByIdSafe('chatInterface');
     var collapseDisclaimerButton = getElementByIdSafe('collapseDisclaimer');
-    var disclaimer = getElementByIdSafe('disclaimer');
-    if (chatInterface.classList.contains('maximized')) {
-        collapseDisclaimerButton.style.display = 'none';
-        disclaimer.style.display = 'flex';
-    } else {
-        collapseDisclaimerButton.style.display = 'inline-block';
-        disclaimer.style.display = 'none';
-    }
-});
+    var expandDisclaimerButton = getElementById
+
 
