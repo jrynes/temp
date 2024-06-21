@@ -1,0 +1,20 @@
+AWS t3.medium:
+
+vCPUs: 2
+Memory: 4 GiB
+Storage: 50 GiB (general purpose SSD)
+AWS t3.large:
+
+vCPUs: 2
+Memory: 8 GiB
+Storage: 50 GiB (general purpose SSD)
+Azure D2s_v3:
+
+vCPUs: 2
+Memory: 8 GiB
+Storage: 50 GiB (Standard SSD)
+Azure D4s_v3:
+
+vCPUs: 4
+Memory: 16 GiB
+Storage: 50 GiB (Standard SSD)
