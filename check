@@ -1,0 +1,24 @@
+function containsPII(message) {
+    // Regular expressions for common PII patterns
+    var emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/;
+    var phoneRegex = /\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b/; // US phone numbers
+    var creditCardRegex = /\b(?:\d[ -]*?){13,16}\b/; // Simple credit card pattern
+    var ssnRegex = /\b\d{3}[-.\s]?\d{2}[-.\s]?\d{4}\b/; // US Social Security Number
+    var dateOfBirthRegex = /\b(?:0[1-9]|1[0-2])[-\/.](?:0[1-9]|[12][0-9]|3[01])[-\/.](?:19|20)\d{2}\b/; // MM/DD/YYYY format
+    var passportNumberRegex = /\b[A-PR-WYa-pr-wy][1-9]\d\s?\d{4}[1-9]\b/; // US Passport number format
+    var studentIDRegex = /\b\d{7,10}\b/; // Assuming student IDs are numeric and 7-10 digits long
+    var addressRegex = /\d+\s[A-z]+\s[A-z]+/; // Simple address pattern (e.g., "123 Main Street")
+    var bankAccountRegex = /\b\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,4}\b/; // Simple bank account pattern
+    var nationalIDRegex = /\b\d{12}\b/; // Example for a 12-digit national ID (like Aadhaar)
+    var driversLicenseRegex = /\b[A-Z0-9]{1,15}\b/; // General pattern for driver's license
+    var healthInsuranceRegex = /\b\d{9}\b/; // Simple 9-digit pattern for health insurance
+
+    // Check if the message matches any PII patterns
+    if (emailRegex.test(message) || phoneRegex.test(message) || creditCardRegex.test(message) ||
+        ssnRegex.test(message) || dateOfBirthRegex.test(message) || passportNumberRegex.test(message) ||
+        studentIDRegex.test(message) || addressRegex.test(message) || bankAccountRegex.test(message) ||
+        nationalIDRegex.test(message) || driversLicenseRegex.test(message) || healthInsuranceRegex.test(message)) {
+        return true;
+    }
+    return false;
+}
